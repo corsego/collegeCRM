@@ -6,3 +6,18 @@
 <br>
 <b>Confirmation:</b>
 <%= user.confirmed? %>
+<br>
+<b><%= 'sign_in_count'.humanize %>:</b>
+<%= user.sign_in_count %>
+<br>
+<b><%= 'current_sign_in_at'.humanize %>:</b>
+<%= user.current_sign_in_at %>
+<br>
+<b><%= 'last_sign_in_at'.humanize %>:</b>
+<%= user.last_sign_in_at %>
+<br>
+<b><%= 'current_sign_in_ip'.humanize %>:</b>
+<%= user.current_sign_in_ip %>
+<br>
+<b><%= 'last_sign_in_ip'.humanize %>:</b>
+<%= user.last_sign_in_ip %>
