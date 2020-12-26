@@ -12,6 +12,10 @@
         <div class="fa fa-home"></div>
         Home
       <% end %>
+      <%= link_to users_path, class: "nav-link #{'active font-weight-bold' if current_page?(users_path)}" do %>
+        <div class="fa fa-users"></div>
+        Users
+      <% end %>
     </ul>
     <ul class="navbar-nav mr-right">
       <% if current_user %>
