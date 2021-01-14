@@ -21,3 +21,5 @@
 <br>
 <b><%= 'last_sign_in_ip'.humanize %>:</b>
 <%= user.last_sign_in_ip %>
+<br>
+<%= link_to "Delete", user, method: :delete, data: {confirm: "Are you sure"} %>
