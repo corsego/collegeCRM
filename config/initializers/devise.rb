@@ -271,7 +271,13 @@ Devise.setup do |config|
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
-  config.omniauth :github, 'a3bd8003eb498ece750d', 'e3ad4a1ebe06922a14122274d16ea17201cc8bfe', scope: 'user'
+
+  if Rails.env.development?
+    config.omniauth :github, 'a3bd8003eb498ece750d', 'e3ad4a1ebe06922a14122274d16ea17201cc8bfe', scope: 'user'
+  elsif Rails.env.production?
+    config.omniauth :github, '78615f728e1f89ce2ba6', '3d1cc91b7de8abe2a8f60545e6d6ebca41939e06', scope: 'user'
+  end
+
   config.omniauth :google_oauth2, '387834148484-0shn4umrtrsqe38nmhjcunme6gt9mjku.apps.googleusercontent.com', 'Au54zNU94SRicA3GIVpPw8XJ'
   config.omniauth :twitter, 'CXcRZSBXIgteQxTt6ylDCpn3h', 'TapcdkHd0YswNMYBqkhPPiL2VR7socFmTTJ5x2H37O6hXeH1G6'
   config.omniauth :facebook, '399773727972678', '9787dac410932c342901423813a5202c'
