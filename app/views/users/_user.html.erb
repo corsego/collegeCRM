@@ -42,7 +42,8 @@
 <b><%= 'roles'.humanize %>:</b>
 <%= user.active_roles.join(", ") %>
 <br>
-<%= link_to "Edit roles", edit_user_path(user) %>
-<%= link_to ban_status(user), ban_user_path(user), method: :patch %>
-<%= link_to "Delete", user, method: :delete, data: {confirm: "Are you sure"} %>
-
+<% if current_user.admin? %>
+  <%= link_to "Edit roles", edit_user_path(user) %>
+  <%= link_to ban_status(user), ban_user_path(user), method: :patch %>
+  <%= link_to "Delete", user, method: :delete, data: {confirm: "Are you sure"} %>
+<% end %>
