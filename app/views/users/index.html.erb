@@ -23,8 +23,8 @@
         <tr>
           <td><%= link_to user.id, user_path(user) %></td>
           <td><%= user %></td>
-          <td><%= user.confirmed? %></td>
-          <td><%= user.access_locked? %></td>
+          <td><%= boolean_label(user.confirmed?) %></td>
+          <td><%= boolean_label(user.access_locked?) %></td>
           <td><%= user.name %></td>
           <td>
             <% if user.image.present? %>
