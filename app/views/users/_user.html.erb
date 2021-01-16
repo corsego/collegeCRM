@@ -39,4 +39,6 @@
   <%= image_tag user.image, size: "50x50" %>
 <% end %>
 <br>
+<%= link_to ban_status(user), ban_user_path(user), method: :patch %>
 <%= link_to "Delete", user, method: :delete, data: {confirm: "Are you sure"} %>
+
