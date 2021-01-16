@@ -43,7 +43,7 @@
 <%= user.active_roles.join(", ") %>
 <br>
 <% if current_user.admin? %>
-  <%= link_to "Edit roles", edit_user_path(user) %>
-  <%= link_to ban_status(user), ban_user_path(user), method: :patch %>
-  <%= link_to "Delete", user, method: :delete, data: {confirm: "Are you sure"} %>
+  <%= link_to "Edit roles", edit_user_path(user), class: "btn btn-sm btn-warning" %>
+  <%= link_to ban_status(user), ban_user_path(user), method: :patch, class: "btn btn-sm btn-danger" %>
+  <%= link_to "Delete", user, method: :delete, data: {confirm: "Are you sure"}, class: "btn btn-sm btn-danger" %>
 <% end %>

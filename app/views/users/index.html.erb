@@ -1,6 +1,46 @@
-All users:
-<%= @users.size %>
-<% @users.each do |user| %>
-  <hr/>
-  <%= render 'users/user', user: user %>
-<% end %>
+<h2>
+  Users:
+  <%= @users.size %>
+</h2>
+
+<div class="table-responsive">
+  <table class="table table-striped table-hover table-sm">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Email</th>
+        <th>Confirmed</th>
+        <th>Banned?</th>
+        <th>Name</th>
+        <th>Image</th>
+        <th>Roles</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+  
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= link_to user.id, user_path(user) %></td>
+          <td><%= user %></td>
+          <td><%= user.confirmed? %></td>
+          <td><%= user.access_locked? %></td>
+          <td><%= user.name %></td>
+          <td>
+            <% if user.image.present? %>
+              <%= image_tag user.image, size: "20x20" %>
+            <% end %>
+          </td>
+          <td><%= user.active_roles.join(", ") %></td>
+          <td>
+            <% if current_user.admin? %>
+              <%= link_to "Edit roles", edit_user_path(user), class: "btn btn-sm btn-warning" %>
+              <%= link_to ban_status(user), ban_user_path(user), method: :patch, class: "btn btn-sm btn-danger" %>
+              <%= link_to "Delete", user, method: :delete, data: {confirm: "Are you sure"}, class: "btn btn-sm btn-danger" %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
