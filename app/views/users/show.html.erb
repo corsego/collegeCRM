@@ -1,3 +1,60 @@
-<%= render 'users/user', user: @user %>
-<br/>
-<%= link_to "All Users", users_path %>
+<div class="card">
+  <div class="card-header">
+    <% if current_user.admin? %>
+      <%= link_to "Edit roles", edit_user_path(@user), class: "btn btn-sm btn-warning" %>
+      <%= link_to ban_status(@user), ban_user_path(@user), method: :patch, class: "btn btn-sm btn-danger" %>
+      <%= link_to "Delete", @user, method: :delete, data: {confirm: "Are you sure"}, class: "btn btn-sm btn-danger" %>
+    <% end %>
+  </div>
+  <div class="card-body">
+    <b>Id:</b>
+    <%= link_to @user.id, user_path(@user) %>
+    <br>
+    <b>Email:</b>
+    <%= @user.email %>
+    <br>
+    <b>Confirmed?</b>
+    <%= boolean_label(@user.confirmed?) %>
+    <br>
+    <b>Banned?</b>
+    <%= boolean_label(@user.access_locked?) %>
+    <br>
+    <b><%= 'sign_in_count'.humanize %>:</b>
+    <%= @user.sign_in_count %>
+    <br>
+    <b><%= 'current_sign_in_at'.humanize %>:</b>
+    <%= @user.current_sign_in_at %>
+    <br>
+    <b><%= 'last_sign_in_at'.humanize %>:</b>
+    <%= @user.last_sign_in_at %>
+    <br>
+    <b><%= 'current_sign_in_ip'.humanize %>:</b>
+    <%= @user.current_sign_in_ip %>
+    <br>
+    <b><%= 'last_sign_in_ip'.humanize %>:</b>
+    <%= @user.last_sign_in_ip %>
+    <br>
+    <b><%= 'locked_at'.humanize %>:</b>
+    <%= @user.locked_at %>
+    <br>
+    <b><%= 'provider'.humanize %>:</b>
+    <%= @user.provider %>
+    <br>
+    <b><%= 'uid'.humanize %>:</b>
+    <%= @user.uid %>
+    <br>
+    <b><%= 'name'.humanize %>:</b>
+    <%= @user.name %>
+    <br>
+    <b><%= 'image'.humanize %>:</b>
+    <% if @user.image.present? %>
+      <%= image_tag @user.image, size: "50x50" %>
+    <% end %>
+    <br>
+    <b><%= 'roles'.humanize %>:</b>
+    <%= @user.active_roles.join(", ") %>
+  </div>
+  <div class="card-footer">
+    <%= link_to "All Users", users_path %>
+  </div>
+</div>
