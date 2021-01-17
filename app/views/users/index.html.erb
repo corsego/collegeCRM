@@ -39,14 +39,14 @@
           </td>
           <td><%= user.active_roles.join(", ") %></td>
           <td><%= boolean_label(user.created_by_invite?) %></td>
-          <td>
-            <%= boolean_label(user.invitation_accepted?) %>
-            <% if user.created_by_invite? && user.invitation_accepted? == false && user.confirmed? == false %>
-              <%= link_to "Resend invitation", resend_invitation_user_path(user), method: :patch %>
-            <% end %>
-            </td>
+          <td><%= boolean_label(user.invitation_accepted?) %></td>
           <td><%= user.invited_by %></td>
           <td>
+            <% if current_user.admin? || user.invited_by == current_user %>
+              <% if user.created_by_invite? && user.invitation_accepted? == false && user.confirmed? == false %>
+                <%= link_to "Resend invitation", resend_invitation_user_path(user), method: :patch, class: "btn btn-sm btn-secondary" %>
+              <% end %>
+            <% end %>
             <% if current_user.admin? %>
               <% if user.confirmed? == false && user.created_by_invite? == false %>
                 <%= link_to "Resend confirmation instructions", resend_confirmation_instructions_user_path(user), method: :patch, class: "btn btn-sm btn-secondary" %>
