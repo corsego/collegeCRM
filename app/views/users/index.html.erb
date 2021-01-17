@@ -1,10 +1,13 @@
-<h2>
-  Users:
-  <%= @users.size %>
-</h2>
-
+<h3>
+  <div class="text-center">
+    Users:
+    <div class="badge badge-info">
+      <%= @users.count %>
+    </div>
+  </div>
+</h3>
 <div class="table-responsive">
-  <table class="table table-striped table-hover table-sm">
+  <table class="table table-striped table-bordered table-hover table-sm table-light shadow">
     <thead>
       <tr>
         <th>Id</th>
@@ -26,7 +29,12 @@
         <tr>
           <td><%= link_to user.id, user_path(user) %></td>
           <td><%= user %></td>
-          <td><%= boolean_label(user.confirmed?) %></td>
+          <td>
+            <%= boolean_label(user.confirmed?) %>
+            <% unless user.confirmed? %>
+              <%= link_to "Resend confirmation instructions", resend_confirmation_instructions_user_path(user), method: :patch %>
+            <% end %>
+          </td>
           <td><%= boolean_label(user.access_locked?) %></td>
           <td><%= user.name %></td>
           <td>

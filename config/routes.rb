@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :show, :destroy, :edit, :update] do
     member do
       patch :ban
+      patch :resend_confirmation_instructions
     end
   end
 

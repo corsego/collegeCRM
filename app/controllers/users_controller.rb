@@ -24,6 +24,16 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  def resend_confirmation_instructions
+    @user = User.find(params[:id])
+    unless @user.confirmed?
+      @user.resend_confirmation_instructions
+      redirect_to @user, notice: "Confirmation instructions were resent"
+    else
+      redirect_to @user, alert: "User already confirmed"
+    end
+  end
+
   def ban
     @user = User.find(params[:id])
     if @user.access_locked?
