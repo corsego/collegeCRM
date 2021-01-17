@@ -17,6 +17,11 @@
           <div class="fa fa-users"></div>
           Users
         <% end %>
+        <%= link_to new_user_invitation_path, class: "nav-link #{'active font-weight-bold' if current_page?(new_user_invitation_path)}" do %>
+          <div class="fa fa-plus"></div>
+          <div class="fa fa-user"></div>
+          Invite User
+        <% end %>
       <% end %>
     </ul>
     <ul class="navbar-nav mr-right">
