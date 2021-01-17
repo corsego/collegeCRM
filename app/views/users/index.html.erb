@@ -14,7 +14,10 @@
         <th>Name</th>
         <th>Image</th>
         <th>Roles</th>
-        <th colspan="3"></th>
+        <th>Created by invite?</th>
+        <th>Invitation accepted?</th>
+        <th>Invited by</th>
+        <th colspan="3">Actions</th>
       </tr>
     </thead>
   
@@ -32,6 +35,9 @@
             <% end %>
           </td>
           <td><%= user.active_roles.join(", ") %></td>
+          <td><%= boolean_label(user.created_by_invite?) %></td>
+          <td><%= boolean_label(user.invitation_accepted?) %></td>
+          <td><%= user.invited_by %></td>
           <td>
             <% if current_user.admin? %>
               <%= link_to "Edit roles", edit_user_path(user), class: "btn btn-sm btn-warning" %>
