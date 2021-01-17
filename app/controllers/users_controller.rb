@@ -26,9 +26,19 @@ class UsersController < ApplicationController
 
   def resend_confirmation_instructions
     @user = User.find(params[:id])
-    unless @user.confirmed?
+    if @user.confirmed? == false && @user.created_by_invite? == false
       @user.resend_confirmation_instructions
       redirect_to @user, notice: "Confirmation instructions were resent"
+    else
+      redirect_to @user, alert: "User already confirmed"
+    end
+  end
+
+  def resend_invitation
+    @user = User.find(params[:id])
+    if @user.created_by_invite? && @user.invitation_accepted? == false && @user.confirmed? == false
+      @user.invite!
+      redirect_to @user, notice: "Invitation was resent"
     else
       redirect_to @user, alert: "User already confirmed"
     end

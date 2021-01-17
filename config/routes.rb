@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     member do
       patch :ban
       patch :resend_confirmation_instructions
+      patch :resend_invitation
     end
   end
 
