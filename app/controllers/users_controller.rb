@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_action :require_admin, only: [:edit, :update, :ban, :destroy]
+  before_action :require_admin, only: [:edit, :update, :ban, :destroy, :resend_confirmation_instructions]
 
   def index
     @users = User.all.order(created_at: :desc)
