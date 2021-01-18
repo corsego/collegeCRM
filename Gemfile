@@ -37,3 +37,5 @@ gem 'omniauth-github'
 gem 'omniauth-twitter'
 gem 'omniauth-facebook'
 gem 'devise_invitable', '~> 2.0.0'
+
+gem 'invisible_captcha'
