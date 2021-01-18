@@ -12,14 +12,13 @@
       <tr>
         <th>Id</th>
         <th>Email</th>
-        <th>Confirmed?</th>
-        <th>Banned?</th>
         <th>Name</th>
         <th>Image</th>
         <th>Roles</th>
+        <th>Confirmed?</th>
+        <th>Banned?</th>
         <th>Created by invite?</th>
         <th>Invitation accepted?</th>
-        <th>Invited by</th>
         <th colspan="3">Actions</th>
       </tr>
     </thead>
@@ -29,8 +28,6 @@
         <tr>
           <td><%= link_to user.id, user_path(user) %></td>
           <td><%= user %></td>
-          <td><%= boolean_label(user.confirmed?) %></td>
-          <td><%= boolean_label(user.access_locked?) %></td>
           <td><%= user.name %></td>
           <td>
             <% if user.image.present? %>
@@ -38,9 +35,10 @@
             <% end %>
           </td>
           <td><%= user.active_roles.join(", ") %></td>
+          <td><%= boolean_label(user.confirmed?) %></td>
+          <td><%= boolean_label(user.access_locked?) %></td>
           <td><%= boolean_label(user.created_by_invite?) %></td>
           <td><%= boolean_label(user.invitation_accepted?) %></td>
-          <td><%= user.invited_by %></td>
           <td>
             <% if current_user.admin? || user.invited_by == current_user %>
               <% if user.created_by_invite? && user.invitation_accepted? == false && user.confirmed? == false %>

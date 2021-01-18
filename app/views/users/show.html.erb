@@ -1,6 +1,14 @@
 <div class="card shadow">
   <div class="card-header">
+    <% if current_user.admin? || @user.invited_by == current_user %>
+      <% if @user.created_by_invite? && @user.invitation_accepted? == false && @user.confirmed? == false %>
+        <%= link_to "Resend invitation", resend_invitation_user_path(@user), method: :patch, class: "btn btn-sm btn-secondary" %>
+      <% end %>
+    <% end %>
     <% if current_user.admin? %>
+      <% if @user.confirmed? == false && @user.created_by_invite? == false %>
+        <%= link_to "Resend confirmation instructions", resend_confirmation_instructions_user_path(@user), method: :patch, class: "btn btn-sm btn-secondary" %>
+      <% end %>
       <%= link_to "Edit roles", edit_user_path(@user), class: "btn btn-sm btn-warning" %>
       <%= link_to ban_status(@user), ban_user_path(@user), method: :patch, class: "btn btn-sm btn-danger" %>
       <%= link_to "Delete", @user, method: :delete, data: {confirm: "Are you sure"}, class: "btn btn-sm btn-danger" %>
@@ -19,6 +27,12 @@
     <b>Banned?</b>
     <%= boolean_label(@user.access_locked?) %>
     <br>
+    <b>Created by invite?</b>
+    <%= boolean_label(@user.created_by_invite?) %>
+    <br>
+    <b>Invitation accepted?</b>
+    <%= boolean_label(@user.invitation_accepted?) %>
+    <br>
     <b><%= 'sign_in_count'.humanize %>:</b>
     <%= @user.sign_in_count %>
     <br>
@@ -36,6 +50,9 @@
     <br>
     <b><%= 'locked_at'.humanize %>:</b>
     <%= @user.locked_at %>
+    <br>
+    <b><%= 'invited_by'.humanize %>:</b>
+    <%= @user.invited_by %>
     <br>
     <b><%= 'provider'.humanize %>:</b>
     <%= @user.provider %>
