@@ -1,7 +1,8 @@
 require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
-  config.action_mailer.default_url_options = {host: "ruby-gems-bootcamp.herokuapp.com", protocol: "https"}
+  # Settings specified here will take precedence over those in config/application.rb.
+  config.action_mailer.default_url_options = {host: "superauth.herokuapp.com", protocol: "https"}
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
   
@@ -19,11 +20,9 @@ Rails.application.configure do
     email: {
       deliver_with: :deliver,
       email_prefix: '[PREFIX] ',
-      sender_address: %{"app error" <hello@corsego.com>},
+      sender_address: %{"superauth error" <hello@corsego.com>},
       exception_recipients: %w{yshmarov@gmail.com}
     }
-
-  # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
   config.cache_classes = true
