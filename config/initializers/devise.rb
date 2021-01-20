@@ -324,9 +324,9 @@ Devise.setup do |config|
   # up on your models and hooks.
 
   config.omniauth :github, Rails.application.credentials[Rails.env.to_sym][:github][:id], Rails.application.credentials[Rails.env.to_sym][:github][:secret]
-  config.omniauth :google_oauth2, Rails.application.credentials.dig(:google_oauth2, :id), Rails.application.credentials.dig(:google_oauth2, :secret)
-  config.omniauth :facebook, Rails.application.credentials.dig(:facebook, :id), Rails.application.credentials.dig(:facebook, :secret)
-  config.omniauth :twitter, Rails.application.credentials.dig(:twitter, :id), Rails.application.credentials.dig(:twitter, :secret)
+  config.omniauth :google_oauth2, Rails.application.credentials[:google_oauth2][:id], Rails.application.credentials[:google_oauth2][:secret]
+  config.omniauth :facebook, Rails.application.credentials[:facebook][:id], Rails.application.credentials[:facebook][:secret]
+  config.omniauth :twitter, Rails.application.credentials[:twitter][:id], Rails.application.credentials[:twitter][:secret]
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

@@ -1,24 +1,78 @@
-# README
+Authentication and Authorization Ruby on Rails app boilerplate 
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Stack:
 
-Things you may want to cover:
+* Rails 6.1 +
+* Ruby 2.7.2 + 
+* Postgresql
 
-* Ruby version
+# Core featuers:
 
-* System dependencies
+## Authentication
 
-* Configuration
+* Log in with email
+* Log in with Google
+* Log in with Facebook
+* Log in with Twitter
+* Log in with Github
+* Invisible Recaptcha
+* Email address confirmations
+* Users can be invited, banned, unbanned, deleted
 
-* Database creation
+## Authorization
 
-* Database initialization
+* User roles
+* Role-based access to different features
+* Admin can edit user roles
 
-* How to run the test suite
+## Connected services:
 
-* Services (job queues, cache servers, search engines, etc.)
+* Google oAuth API
+* Facebook oAuth API
+* Twitter oAuth API
+* Github oAuth API
+* Amazon SES emails API
 
-* Deployment instructions
+# Installation
 
-* ...
+console:
+```
+git clone https://github.com/corsego/superauth
+cd superauth
+bundle
+yarn
+rails db:create db:migrate
+```
+
+Update your `credentials.yml` file
+
+[Howto guide](https://blog.corsego.com/ruby-on-rails-6-credentials-tldr)
+
+credentials.yml example:
+```
+development:
+  github:
+    id: YOUR_CLIENT_ID
+    secret: YOUR_CLIENT_SECRET
+production:
+  github:
+    id: YOUR_CLIENT_ID
+    secret: YOUR_CLIENT_SECRET
+
+google_oauth2:
+  id: YOUR_CLIENT_ID
+  secret: YOUR_CLIENT_SECRET
+
+facebook:
+  id: YOUR_CLIENT_ID
+  secret: YOUR_CLIENT_SECRET
+
+twitter:
+  id: YOUR_CLIENT_ID
+  secret: YOUR_CLIENT_SECRET
+
+smtp:
+  address: email-smtp.eu-central-1.amazonaws.com
+  user_name: YOUR_CLIENT_ID
+  password: YOUR_CLIENT_SECRET
+```
