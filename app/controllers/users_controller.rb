@@ -48,12 +48,16 @@ class UsersController < ApplicationController
 
   def ban
     @user = User.find(params[:id])
-    if @user.access_locked?
-      @user.unlock_access!
+    if @user == current_user
+      redirect_to @user, alert: "You can not ban yourself"
     else
-      @user.lock_access!
+      if @user.access_locked?
+        @user.unlock_access!
+      else
+        @user.lock_access!
+      end
+      redirect_to @user, notice: "User access locked: #{@user.access_locked?}"
     end
-    redirect_to @user, notice: "User access locked: #{@user.access_locked?}"
   end
 
   def destroy
