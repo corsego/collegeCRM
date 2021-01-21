@@ -2,6 +2,7 @@ class UsersController < ApplicationController
 
   before_action :require_admin, only: [:ban, :destroy, :resend_confirmation_instructions]
   before_action :require_admin_or_inviter, only: [:resend_invitation]
+  before_action :require_admin_or_owner, only: [:edit, :update]
 
   def index
     @users = User.all.order(created_at: :desc)
@@ -64,7 +65,8 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    list_allowed_params = [:name]
+    list_allowed_params = []
+    list_allowed_params += [:name] if current_user == @user || current_user.admin?
     list_allowed_params += [*User::ROLES] if current_user.admin?
     params.require(:user).permit(list_allowed_params)
     # params.require(:user).permit(*User::ROLES, :name)
@@ -80,6 +82,13 @@ class UsersController < ApplicationController
   def require_admin_or_inviter
     @user = User.find(params[:id])
     unless current_user.admin? || @user.invited_by == current_user
+      redirect_to (request.referrer || root_path), alert: "You are not authorized to perform this action"
+    end
+  end
+
+  def require_admin_or_owner
+    @user = User.find(params[:id])
+    unless current_user.admin? || current_user == @user
       redirect_to (request.referrer || root_path), alert: "You are not authorized to perform this action"
     end
   end
