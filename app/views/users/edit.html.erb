@@ -22,6 +22,11 @@
           </ul>
         </div>
       <% end %>
+
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+      
+      <br>
     
       <% User::ROLES.each do |role| %>
         <label>
