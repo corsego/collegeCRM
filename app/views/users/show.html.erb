@@ -1,18 +1,16 @@
 <div class="card shadow">
   <div class="card-header">
-    <% if current_user.admin? || @user.invited_by == current_user %>
+    <% if @user.invited_by == current_user %>
       <% if @user.created_by_invite? && @user.invitation_accepted? == false && @user.confirmed? == false %>
         <%= link_to "Resend invitation", resend_invitation_user_path(@user), method: :patch, class: "btn btn-sm btn-secondary" %>
       <% end %>
     <% end %>
-    <% if current_user.admin? %>
-      <% if @user.confirmed? == false && @user.created_by_invite? == false %>
-        <%= link_to "Resend confirmation instructions", resend_confirmation_instructions_user_path(@user), method: :patch, class: "btn btn-sm btn-secondary" %>
-      <% end %>
-      <%= link_to "Edit roles", edit_user_path(@user), class: "btn btn-sm btn-warning" %>
-      <%= link_to ban_status(@user), ban_user_path(@user), method: :patch, class: "btn btn-sm btn-danger" %>
-      <%= link_to "Delete", @user, method: :delete, data: {confirm: "Are you sure"}, class: "btn btn-sm btn-danger" %>
+    <% if @user.confirmed? == false && @user.created_by_invite? == false %>
+      <%= link_to "Resend confirmation instructions", resend_confirmation_instructions_user_path(@user), method: :patch, class: "btn btn-sm btn-secondary" %>
     <% end %>
+    <%= link_to "Edit", edit_user_path(@user), class: "btn btn-sm btn-warning" %>
+    <%= link_to ban_status(@user), ban_user_path(@user), method: :patch, class: "btn btn-sm btn-danger" %>
+    <%= link_to "Delete", @user, method: :delete, data: {confirm: "Are you sure"}, class: "btn btn-sm btn-danger" %>
   </div>
   <div class="card-body">
     <b>Id:</b>

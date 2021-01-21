@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_action :require_admin, only: [:edit, :update, :ban, :destroy, :resend_confirmation_instructions]
+  before_action :require_admin, only: [:ban, :destroy, :resend_confirmation_instructions]
   before_action :require_admin_or_inviter, only: [:resend_invitation]
 
   def index
@@ -64,7 +64,10 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(*User::ROLES, :name)
+    list_allowed_params = [:name]
+    list_allowed_params += [*User::ROLES] if current_user.admin?
+    params.require(:user).permit(list_allowed_params)
+    # params.require(:user).permit(*User::ROLES, :name)
   end
 
   def require_admin

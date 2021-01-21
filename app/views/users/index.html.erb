@@ -48,7 +48,7 @@
               <% if user.confirmed? == false && user.created_by_invite? == false %>
                 <%= link_to "Resend confirmation instructions", resend_confirmation_instructions_user_path(user), method: :patch, class: "btn btn-sm btn-secondary" %>
               <% end %>
-              <%= link_to "Edit roles", edit_user_path(user), class: "btn btn-sm btn-warning" %>
+              <%= link_to "Edit", edit_user_path(user), class: "btn btn-sm btn-warning" %>
               <%= link_to ban_status(user), ban_user_path(user), method: :patch, class: "btn btn-sm btn-danger" %>
               <%= link_to "Delete", user, method: :delete, data: {confirm: "Are you sure"}, class: "btn btn-sm btn-danger" %>
           </td>
