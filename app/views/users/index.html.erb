@@ -4,6 +4,11 @@
     <div class="badge badge-info">
       <%= @users.count %>
     </div>
+    <%= link_to new_user_invitation_path, class: "btn btn-primary" do %>
+      <div class="fa fa-plus"></div>
+      <div class="fa fa-user"></div>
+      Invite User
+    <% end %>
   </div>
 </h3>
 <div class="table-responsive">
