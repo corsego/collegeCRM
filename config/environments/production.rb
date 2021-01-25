@@ -6,15 +6,16 @@ Rails.application.configure do
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
   
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    port: 587,
-    address: Rails.application.credentials[:smtp][:address],
-    user_name: Rails.application.credentials[:smtp][:user_name],
-    password: Rails.application.credentials[:smtp][:password],
-    authentication: :plain,
-    enable_starttls_auto: true
-  }
+  if Rails.application.credentials[:smtp][:address].present?
+    config.action_mailer.smtp_settings = {
+      port: 587,
+      address: Rails.application.credentials[:smtp][:address],
+      user_name: Rails.application.credentials[:smtp][:user_name],
+      password: Rails.application.credentials[:smtp][:password],
+      authentication: :plain,
+      enable_starttls_auto: true
+    }
+  end
 
   Rails.application.config.middleware.use ExceptionNotification::Rack,
     email: {
