@@ -1,27 +1,36 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Classrooms</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @classrooms.each do |classroom| %>
+<h3>
+  <div class="text-center">
+    Classrooms
+    <div class="badge badge-info">
+      <%= @classrooms.count %>
+    </div>
+    <%= link_to "New classroom", new_classroom_path, class: 'btn btn-primary' %>
+  </div>
+</h3>
+<div class="table-responsive">
+  <table class="table table-striped table-bordered table-hover table-sm table-light shadow">
+    <thead>
       <tr>
-        <td><%= classroom.name %></td>
-        <td><%= link_to 'Show', classroom %></td>
-        <td><%= link_to 'Edit', edit_classroom_path(classroom) %></td>
-        <td><%= link_to 'Destroy', classroom, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>Id</th>
+    	  
+        <th>Name</th>
+        
+        <th>Actions</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Classroom', new_classroom_path %>
+    </thead>
+    <tbody>
+      <% @classrooms.each do |classroom| %>
+        <%= content_tag :tr, id: dom_id(classroom), class: dom_class(classroom) do %>
+          <td><%= link_to classroom.id, classroom %></td>
+          
+            <td><%= classroom.name %></td>
+          
+          <td>
+            <%= link_to 'Edit', edit_classroom_path(classroom), class: 'btn btn-sm btn-warning' %>
+            <%= link_to 'Destroy', classroom, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger' %>
+          </td>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+</div>

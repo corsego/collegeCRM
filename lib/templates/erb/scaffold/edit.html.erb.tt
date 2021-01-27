@@ -1,0 +1,15 @@
+<div class="card shadow">
+  <div class="card-header">
+    <h4>
+      Edit
+      <%= singular_table_name.capitalize %>
+    </h4>
+  </div>
+  <div class="card-body">
+    <%%= render 'form', <%= singular_table_name %>: @<%= singular_table_name %> %>
+  </div>
+  <div class="card-footer">
+    <%%= link_to 'Show', @<%= singular_table_name %> %> |
+    <%%= link_to 'Back', <%= index_helper %>_path %>
+  </div>
+</div>

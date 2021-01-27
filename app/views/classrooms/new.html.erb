@@ -1,5 +1,14 @@
-<h1>New Classroom</h1>
-
-<%= render 'form', classroom: @classroom %>
-
-<%= link_to 'Back', classrooms_path %>
+<div class="card shadow">
+  <div class="card-header">
+    <h4>
+      New
+      Classroom
+    </h4>
+  </div>
+  <div class="card-body">
+    <%= render 'form', classroom: @classroom %>
+  </div>
+  <div class="card-footer">
+    <%= link_to 'Back', classrooms_path %>
+  </div>
+</div>

@@ -1,9 +1,17 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @classroom.name %>
-</p>
-
-<%= link_to 'Edit', edit_classroom_path(@classroom) %> |
-<%= link_to 'Back', classrooms_path %>
+<div class="card shadow">
+  <div class="card-header">
+    <h4>
+      Classroom
+    </h4>
+  </div>
+  <div class="card-body">
+    
+        <strong>Name:</strong>
+        <%= @classroom.name %>
+    
+  </div>
+  <div class="card-footer">
+    <%= link_to 'Edit', edit_classroom_path(@classroom) %> |
+    <%= link_to 'Back', classrooms_path %>
+  </div>
+</div>
