@@ -101,6 +101,7 @@ GEM
     hashie (4.1.0)
     i18n (1.8.5)
       concurrent-ruby (~> 1.0)
+    ice_cube (0.16.3)
     invisible_captcha (1.1.0)
       rails (>= 4.2)
     jbuilder (2.10.1)
@@ -270,6 +271,7 @@ DEPENDENCIES
   devise
   devise_invitable (~> 2.0.0)
   exception_notification
+  ice_cube
   invisible_captcha
   jbuilder (~> 2.7)
   listen (~> 3.3)

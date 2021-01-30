@@ -21,6 +21,8 @@
         
         <th>Start Time</th>
         <th>Days</th>
+        <th>Schedule</th>
+        <th>Occurrences</th>
         <th>Actions</th>
       </tr>
     </thead>
@@ -36,6 +38,12 @@
             <td><%= course.service %></td>
             <td><%= course.start_time&.strftime("%H:%M") %></td>
             <td><%= course.active_days.join(", ") %></td>
+            <td><%= course.schedule %></td>
+            <td><% course.schedule.occurrences(Time.now + 1.month).each do |occurrence| %>
+                <%= occurrence&.strftime("%d/%b/%y") %>
+                <br>
+              <% end %>
+            </td>
           
           <td>
             <%= link_to 'Edit', edit_course_path(course), class: 'btn btn-sm btn-warning' %>
