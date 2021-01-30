@@ -1,0 +1,26 @@
+<div class="card shadow">
+  <div class="card-header">
+    <h4>
+      Course
+    </h4>
+  </div>
+  <div class="card-body">
+  
+    <br>
+    <b>User:</b>
+    <%= @course.user %>
+  
+    <br>
+    <b>Classroom:</b>
+    <%= @course.classroom %>
+  
+    <br>
+    <b>Service:</b>
+    <%= @course.service %>
+  
+  </div>
+  <div class="card-footer">
+    <%= link_to 'Edit', edit_course_path(@course) %> |
+    <%= link_to 'Back', courses_path %>
+  </div>
+</div>

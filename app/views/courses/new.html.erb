@@ -1,0 +1,14 @@
+<div class="card shadow">
+  <div class="card-header">
+    <h4>
+      New
+      Course
+    </h4>
+  </div>
+  <div class="card-body">
+    <%= render 'form', course: @course %>
+  </div>
+  <div class="card-footer">
+    <%= link_to 'Back', courses_path %>
+  </div>
+</div>

@@ -1,0 +1,44 @@
+<h3>
+  <div class="text-center">
+    Courses
+    <div class="badge badge-info">
+      <%= @courses.count %>
+    </div>
+    <%= link_to "New course", new_course_path, class: 'btn btn-primary' %>
+  </div>
+</h3>
+<div class="table-responsive">
+  <table class="table table-striped table-bordered table-hover table-sm table-light shadow">
+    <thead>
+      <tr>
+        <th>Id</th>
+    	  
+        <th>User</th>
+        
+        <th>Classroom</th>
+        
+        <th>Service</th>
+        
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @courses.each do |course| %>
+        <%= content_tag :tr, id: dom_id(course), class: dom_class(course) do %>
+          <td><%= link_to course.id, course %></td>
+          
+            <td><%= course.user %></td>
+          
+            <td><%= course.classroom %></td>
+          
+            <td><%= course.service %></td>
+          
+          <td>
+            <%= link_to 'Edit', edit_course_path(course), class: 'btn btn-sm btn-warning' %>
+            <%= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger' %>
+          </td>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+</div>
