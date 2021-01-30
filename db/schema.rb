@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 2021_01_30_152913) do
     t.bigint "user_id", null: false
     t.bigint "classroom_id", null: false
     t.bigint "course_id", null: false
-    t.string "status"
+    t.string "status", default: "planned"
     t.datetime "start"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
