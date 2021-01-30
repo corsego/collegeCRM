@@ -21,6 +21,10 @@
           <div class="fa fa-door-open"></div>
           Classrooms
         <% end %>
+        <%= link_to services_path, class: "nav-link #{'active font-weight-bold' if current_page?(services_path)}" do %>
+          <div class="fa fa-tags"></div>
+          Services
+        <% end %>
       <% end %>
     </ul>
     <ul class="navbar-nav mr-right">
