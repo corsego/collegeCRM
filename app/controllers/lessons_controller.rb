@@ -2,7 +2,7 @@ class LessonsController < ApplicationController
   before_action :set_lesson, only: [:show, :edit, :update, :destroy]
 
   def index
-    @lessons = Lesson.all
+    @lessons = Lesson.includes(:user, :course, :classroom)
   end
 
   def show
