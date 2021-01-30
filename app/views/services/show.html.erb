@@ -1,0 +1,26 @@
+<div class="card shadow">
+  <div class="card-header">
+    <h4>
+      Service
+    </h4>
+  </div>
+  <div class="card-body">
+  
+    <br>
+    <b>Name:</b>
+    <%= @service.name %>
+  
+    <br>
+    <b>Duration:</b>
+    <%= @service.duration %>
+  
+    <br>
+    <b>Client price:</b>
+    <%= @service.client_price %>
+  
+  </div>
+  <div class="card-footer">
+    <%= link_to 'Edit', edit_service_path(@service) %> |
+    <%= link_to 'Back', services_path %>
+  </div>
+</div>

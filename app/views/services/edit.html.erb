@@ -1,0 +1,15 @@
+<div class="card shadow">
+  <div class="card-header">
+    <h4>
+      Edit
+      Service
+    </h4>
+  </div>
+  <div class="card-body">
+    <%= render 'form', service: @service %>
+  </div>
+  <div class="card-footer">
+    <%= link_to 'Show', @service %> |
+    <%= link_to 'Back', services_path %>
+  </div>
+</div>
