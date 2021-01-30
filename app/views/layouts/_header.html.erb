@@ -25,6 +25,10 @@
           <div class="fa fa-tags"></div>
           Services
         <% end %>
+        <%= link_to courses_path, class: "nav-link #{'active font-weight-bold' if current_page?(courses_path)}" do %>
+          <div class="fa fa-user-friends"></div>
+          Courses
+        <% end %>
       <% end %>
     </ul>
     <ul class="navbar-nav mr-right">
