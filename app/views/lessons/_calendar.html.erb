@@ -16,11 +16,11 @@
             <%= link_to lesson.classroom_id, classroom_path(lesson.classroom) %>
             Start:
             <%= lesson.start.strftime("%H:%M") %>
-            <%= lesson.status %>
+            <%= status_label(lesson.status) %>
 
             <% lesson.attendances.each do |attendance| %>
               <%= attendance.user %>
-              <%= attendance.status %>
+              <%= status_label(attendance.status) %>
             <% end %>
             
           </div>
