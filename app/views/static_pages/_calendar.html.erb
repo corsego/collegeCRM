@@ -4,27 +4,29 @@
       <%= month_calendar(events: @lessons, attribute: :start) do |date, lessons| %>
         <%= date %>
       
-        <% lessons.each do |lesson| %>
-          <div>
-            Id:
-            <%= link_to lesson.id, edit_course_lesson_path(lesson.course, lesson) %>
-            Course:
-            <%= link_to lesson.course_id, course_path(lesson.course) %>
-            User:
-            <%= link_to lesson.user_id, user_path(lesson.user) %>
-            Classroom:
-            <%= link_to lesson.classroom_id, classroom_path(lesson.classroom) %>
-            Start:
-            <%= lesson.start.strftime("%H:%M") %>
-            <%= status_label(lesson.status) %>
-
-            <% lesson.attendances.each do |attendance| %>
-              <%= attendance.user %>
-              <%= status_label(attendance.status) %>
-            <% end %>
-            
-          </div>
-        <% end %>
+        <ul class="list-group">
+          <% lessons.each do |lesson| %>
+            <li class="list-group-item">
+              <%= link_to lesson.start.strftime("%H:%M"), edit_course_lesson_path(lesson.course, lesson) %>
+              Course:
+              <%= link_to lesson.course_id, course_path(lesson.course) %>
+              User:
+              <%= link_to lesson.user, user_path(lesson.user) %>
+              Classroom:
+              <%= link_to lesson.classroom, classroom_path(lesson.classroom) %>
+              <%= status_label(lesson.status) %>
+  
+              <ul class="list-group">
+                <% lesson.attendances.each do |attendance| %>
+                  <li class="list-group-item">
+                    <%= attendance.user %>
+                    <%= status_label(attendance.status) %>
+                  </li>
+                <% end %>
+              </ul>
+            </li>
+          <% end %>
+        </ul>
       <% end %>
     </div>
   </div>

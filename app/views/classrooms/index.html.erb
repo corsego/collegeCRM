@@ -14,6 +14,7 @@
         <th>Id</th>
     	  
         <th>Name</th>
+        <th>Courses</th>
         
         <th>Actions</th>
       </tr>
@@ -24,6 +25,7 @@
           <td><%= link_to classroom.id, classroom %></td>
           
             <td><%= classroom.name %></td>
+            <td><%= classroom.courses.count %></td>
           
           <td>
             <%= link_to 'Edit', edit_classroom_path(classroom), class: 'btn btn-sm btn-warning' %>
