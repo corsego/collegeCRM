@@ -1,9 +1,13 @@
 <br>
 <%= form_tag calendar_path, method: :get do %>
-  <% unless params[:user_id].present? %>
+  <% unless params.has_key?(:user_id) %>
     <%= select_tag :user_id, options_for_select(User.all.map{|x| [x.to_s, x.id]}), {prompt: "User", onchange: "this.form.submit()"} %>
+    <%= select_tag :classroom_id, options_for_select(Classroom.all.map{|x| [x.to_s, x.id]}), {prompt: "Classroom", onchange: "this.form.submit()"} %>
+    <%= select_tag :course_id, options_for_select(Course.all.map{|x| [x.to_s, x.id]}), {prompt: "Course", onchange: "this.form.submit()"} %>
   <% else %>  
     <%= select_tag :user_id, options_for_select(User.all.map{|x| [x.to_s, x.id]}, params[:user_id]), {prompt: "User", onchange: "this.form.submit()"} %>
+    <%= select_tag :classroom_id, options_for_select(Classroom.all.map{|x| [x.to_s, x.id]}, params[:classroom_id]), {prompt: "Classroom", onchange: "this.form.submit()"} %>
+    <%= select_tag :course_id, options_for_select(Course.all.map{|x| [x.to_s, x.id]}, params[:course_id]), {prompt: "Course", onchange: "this.form.submit()"} %>
     <%= link_to "refresh", calendar_path, class: "btn btn-sm btn-secondary" %>
   <% end %>
 <% end %>
