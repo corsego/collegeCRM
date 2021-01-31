@@ -53,5 +53,6 @@
   </table>
 </div>
 
-
-<%= render 'courses/lessons/calendar' %>
+<%= link_to "New Lesson", new_course_lesson_path(@course), class: "btn btn-primary" %>
+<p>
+<%= render 'static_pages/calendar' %>
