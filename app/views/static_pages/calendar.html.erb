@@ -1,1 +1,11 @@
+<br>
+<%= form_tag calendar_path, method: :get do %>
+  <% unless params[:user_id].present? %>
+    <%= select_tag :user_id, options_for_select(User.all.map{|x| [x.to_s, x.id]}), {prompt: "User", onchange: "this.form.submit()"} %>
+  <% else %>  
+    <%= select_tag :user_id, options_for_select(User.all.map{|x| [x.to_s, x.id]}, params[:user_id]), {prompt: "User", onchange: "this.form.submit()"} %>
+    <%= link_to "refresh", calendar_path, class: "btn btn-sm btn-secondary" %>
+  <% end %>
+<% end %>
+
 <%= render 'static_pages/calendar' %>

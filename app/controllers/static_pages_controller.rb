@@ -8,6 +8,10 @@ class StaticPagesController < ApplicationController
   end
   
   def calendar
-    @lessons = Lesson.all
+    if params[:user_id].present?
+      @lessons = Lesson.includes(:user, :classroom, :course, :attendances).where(user_id: params[:user_id])
+    else
+      @lessons = Lesson.includes(:user, :classroom, :course, :attendances)
+    end
   end
 end
