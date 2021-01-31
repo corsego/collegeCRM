@@ -1,0 +1,5 @@
+<div class="nested-fields">
+  <%= f.association :user %>
+  <%= f.input :status, collection: Attendance.statuses, include_blank: false, as: :radio_buttons %>
+  <%= link_to_remove_association "remove enrollment", f %>
+</div>

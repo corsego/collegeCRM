@@ -9,6 +9,16 @@
     <%= f.association :course %>
     <%= f.input :status, collection: Lesson.statuses, include_blank: false, as: :radio_buttons %>
     <%= f.input :start, minute_step: 15, start_year: Date.today.year - 1, end_year: Date.today.year + 1 %>
+
+    <h3>Attendances</h3>
+    <div id="attendances">
+      <%= f.simple_fields_for :attendances do |attendance| %>
+        <%= render 'attendance_fields', f: attendance %>
+      <% end %>
+      <div class="links">
+        <%= link_to_add_association 'add attendance', f, :attendances %>
+      </div>
+    </div>
   </div>
 
   <div class="form-actions">
