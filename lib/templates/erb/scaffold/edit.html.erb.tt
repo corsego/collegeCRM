@@ -9,7 +9,7 @@
     <%%= render 'form', <%= singular_table_name %>: @<%= singular_table_name %> %>
   </div>
   <div class="card-footer">
-    <%%= link_to 'Show', @<%= singular_table_name %> %> |
-    <%%= link_to 'Back', <%= index_helper %>_path %>
+    <%%= link_to 'Show', @<%= singular_table_name %>, class: 'btn btn-sm btn-secondary' %>
+    <%%= link_to 'Back', <%= index_helper %>_path, class: 'btn btn-sm btn-secondary' %>
   </div>
 </div>

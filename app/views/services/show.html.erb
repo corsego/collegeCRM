@@ -6,21 +6,22 @@
   </div>
   <div class="card-body">
   
-    <br>
     <b>Name:</b>
     <%= @service.name %>
-  
     <br>
+  
     <b>Duration:</b>
     <%= @service.duration %>
-  
     <br>
+  
     <b>Client price:</b>
     <%= @service.client_price %>
+    <br>
   
   </div>
   <div class="card-footer">
-    <%= link_to 'Edit', edit_service_path(@service) %> |
-    <%= link_to 'Back', services_path %>
+    <%= link_to 'Edit', edit_service_path(@service), class: 'btn btn-sm btn-warning' %>
+    <%= link_to 'Destroy', @service, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger' %>
+    <%= link_to 'Back', services_path, class: 'btn btn-sm btn-secondary' %>
   </div>
 </div>

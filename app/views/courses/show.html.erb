@@ -6,30 +6,33 @@
   </div>
   <div class="card-body">
   
-    <br>
     <b>User:</b>
     <%= @course.user %>
-  
     <br>
+  
     <b>Classroom:</b>
     <%= @course.classroom %>
-  
     <br>
+  
     <b>Service:</b>
     <%= @course.service %>
-
     <br>
+
     <b>Start Time:</b>
     <%= @course.start_time&.strftime("%H:%M") %>
-
     <br>
+
     <b>Days:</b>
     <%= @course.active_days.join(", ") %>
+    <br>
   
   </div>
   <div class="card-footer">
-    <%= link_to 'Edit', edit_course_path(@course) %> |
-    <%= link_to 'Back', courses_path %>
+
+    <%= link_to 'Edit', edit_course_path(@course), class: 'btn btn-sm btn-warning' %>
+    <%= link_to 'Destroy', @course, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger' %>
+    <%= link_to 'Back', courses_path, class: 'btn btn-sm btn-secondary' %>
+    <%= link_to "New Lesson", new_course_lesson_path(@course), class: "btn btn-sm btn-primary" %>
   </div>
 </div>
 
@@ -53,6 +56,4 @@
   </table>
 </div>
 
-<%= link_to "New Lesson", new_course_lesson_path(@course), class: "btn btn-primary" %>
-<p>
 <%= render 'static_pages/calendar' %>
