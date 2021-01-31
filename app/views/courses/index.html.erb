@@ -39,7 +39,7 @@
             <td><%= course.start_time %></td>
             <td><%= course.active_days.join(", ") %></td>
             <td><%= course.schedule %></td>
-            <td><% course.schedule.occurrences(Time.now + 1.month).each do |occurrence| %>
+            <td><% course.schedule.next_occurrences(8).each do |occurrence| %>
                 <%= occurrence %>
                 <br>
               <% end %>
