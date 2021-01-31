@@ -18,3 +18,6 @@ require("stylesheets/application.scss")
 
 import "@fortawesome/fontawesome-free/css/all"
 global.toastr = require("toastr")
+
+require("jquery")
+require("@nathanvda/cocoon")
