@@ -13,6 +13,10 @@
         Home
       <% end %>
       <% if current_user %>
+        <%= link_to calendar_path, class: "nav-link #{'active font-weight-bold' if current_page?(calendar_path)}" do %>
+          <div class="fa fa-calendar-alt"></div>
+          Calendar
+        <% end %>
         <%= link_to users_path, class: "nav-link #{'active font-weight-bold' if current_page?(users_path)}" do %>
           <div class="fa fa-users"></div>
           Users

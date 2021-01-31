@@ -7,17 +7,7 @@
     <%= link_to "New lesson", new_lesson_path, class: 'btn btn-primary' %>
   </div>
 </h3>
-<div class="table-responsive">
-  <%= month_calendar(events: @lessons, attribute: :start) do |date, lessons| %>
-    <%= date %>
-  
-    <% lessons.each do |lesson| %>
-      <div>
-        <%= link_to lesson.id, lesson_path(lesson) %>
-      </div>
-    <% end %>
-  <% end %>
-</div>
+<%= render 'lessons/calendar' %>
 <div class="table-responsive">
   <table class="table table-striped table-bordered table-hover table-sm table-light shadow">
     <thead>
