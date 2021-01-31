@@ -62,8 +62,11 @@ class UsersController < ApplicationController
 
   def destroy
     @user = User.find(params[:id])
-    @user.destroy
-    redirect_to users_path, notice: "User was successfully destroyed."
+    if @user.destroy
+      redirect_to users_path, notice: "User was successfully destroyed."
+    else
+      redirect_to users_path, alert: "User has associations. Can not be destroyed."
+    end
   end
 
   private

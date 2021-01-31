@@ -34,8 +34,11 @@ class ServicesController < ApplicationController
   end
 
   def destroy
-    @service.destroy
-    redirect_to services_url, notice: 'Service was successfully destroyed.'
+    if @service.destroy
+      redirect_to services_url, notice: 'Service was successfully destroyed.'
+    else
+      redirect_to services_url, alert: 'Service has courses. Can not be destroyed.'
+    end
   end
 
   private

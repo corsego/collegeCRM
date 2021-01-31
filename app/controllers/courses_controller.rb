@@ -57,8 +57,11 @@ class CoursesController < ApplicationController
   end
 
   def destroy
-    @course.destroy
-    redirect_to courses_url, notice: 'Course was successfully destroyed.'
+    if @course.destroy
+      redirect_to courses_url, notice: 'Course was successfully destroyed.'
+    else
+      redirect_to courses_url, alert: 'Course has lessons. Can not be deleted.'
+    end
   end
 
   private

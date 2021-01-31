@@ -34,8 +34,11 @@ class ClassroomsController < ApplicationController
   end
 
   def destroy
-    @classroom.destroy
-    redirect_to classrooms_url, notice: 'Classroom was successfully destroyed.'
+    if @classroom.destroy
+      redirect_to classrooms_url, notice: 'Classroom was successfully destroyed.'
+    else
+      redirect_to classrooms_url, alert: 'Classroom has courses. Can not be deleted.'
+    end
   end
 
   private

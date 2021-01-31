@@ -10,5 +10,6 @@
   </div>
   <div class="card-footer">
     <%= link_to 'Back', @course, class: 'btn btn-sm btn-secondary' %>
+    <%= link_to 'Delete', [@course, @lesson], method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger' %>
   </div>
 </div>
