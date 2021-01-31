@@ -7,7 +7,7 @@
         <% lessons.each do |lesson| %>
           <div>
             Id:
-            <%= link_to lesson.id, lesson_path(lesson) %>
+            <%= link_to lesson.id, edit_course_lesson_path(lesson.course, lesson) %>
             Course:
             <%= link_to lesson.course_id, course_path(lesson.course) %>
             User:
