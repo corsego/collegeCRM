@@ -16,6 +16,10 @@
             <%= link_to lesson.classroom_id, classroom_path(lesson.classroom) %>
             Start:
             <%= lesson.start.strftime("%H:%M") %>
+
+            <% lesson.course.enrollments.each do |enrollment| %>
+              <%= enrollment.user %>
+            <% end %>
             
           </div>
         <% end %>
