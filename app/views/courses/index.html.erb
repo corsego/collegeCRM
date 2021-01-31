@@ -23,6 +23,9 @@
         <th>Days</th>
         <th>Schedule</th>
         <th>Occurrences</th>
+        <th>Enrollments</th>
+        <th>Lessons</th>
+        <th>Attendances</th>
         <th>Actions</th>
       </tr>
     </thead>
@@ -45,6 +48,9 @@
               <% end %>
               <%= link_to "Generate lessons", generate_lessons_course_path(course), method: :patch %>
             </td>
+            <td><%= course.enrollments.count %></td>
+            <td><%= course.lessons.count %></td>
+            <td><%= course.attendances.count %></td>
           
           <td>
             <%= link_to 'Edit', edit_course_path(course), class: 'btn btn-sm btn-warning' %>

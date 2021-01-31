@@ -15,6 +15,14 @@ class CoursesController < ApplicationController
     @course.schedule.next_occurrences(8).each do |occurrence|
       @course.lessons.find_or_create_by(start: occurrence, user: @course.user, classroom: @course.classroom)
     end
+    
+    # generate attendances for future lessons
+    @course.lessons.where("start > ?", Time.now).each do |lesson|
+      @course.enrollments.each do |enrollment|
+        lesson.attendances.find_or_create_by(status: "planned", user: enrollment.user)
+      end
+    end
+    
     redirect_to @course, notice: "generate_lessons - ok"
   end
 

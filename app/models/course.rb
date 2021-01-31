@@ -6,6 +6,8 @@ class Course < ApplicationRecord
 
   has_many :enrollments, inverse_of: :course
   accepts_nested_attributes_for :enrollments, reject_if: :all_blank, allow_destroy: true
+
+  has_many :attendances, through: :lessons
   
   include Schedulable
   
