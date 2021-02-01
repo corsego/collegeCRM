@@ -57,24 +57,15 @@
     </h4>
   </div>
   <div class="card-body">
-    <div class="table-responsive">
-      <table class="table table-striped table-bordered table-hover table-sm table-light shadow">
-        <thead>
-          <tr>
-            <th>Id</th>
-            <th>User</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @enrollments.each do |enrollment| %>
-            <%= content_tag :tr, id: dom_id(enrollment), class: dom_class(enrollment) do %>
-              <td><%= enrollment.id %></td>
-              <td><%= enrollment.user %></td>
-            <% end %>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
+
+    <ul class="list-group">
+      <% @enrollments.each do |enrollment| %>
+        <li class="list-group-item">
+          <%= link_to enrollment.user, user_path(enrollment.user) %>
+        </li>
+      <% end %>
+    </ul>
+
   </div>
 </div>
 <br>

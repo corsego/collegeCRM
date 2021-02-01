@@ -15,12 +15,14 @@
         <%= render 'attendance_fields', f: attendance %>
       <% end %>
       <div class="links">
-        <%= link_to_add_association 'add attendance', f, :attendances %>
+        <br>
+        <%= link_to_add_association 'add attendance', f, :attendances, class: 'btn btn-sm btn-primary' %>
       </div>
     </div>
   </div>
 
   <div class="form-actions">
+    <hr>
     <%= f.button :submit %>
   </div>
 <% end %>
