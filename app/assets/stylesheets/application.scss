@@ -15,3 +15,7 @@ body {
 footer {
     margin-top: auto;
 }
+
+//hide simple_form checkmarks
+.form-control.form-control-sm.is-invalid{ background-image: none; }
+.form-control.form-control-sm.is-valid{ background-image: none; }
