@@ -25,6 +25,19 @@
     <b>Days:</b>
     <%= @course.active_days.join(", ") %>
     <br>
+
+    <b>Schedule:</b>
+    <%= @course.schedule %>
+    <br>
+
+    <b>Occurrences:</b>
+    <% @course.schedule.next_occurrences(8).each do |occurrence| %>
+      <br>
+      <%= occurrence.strftime("%a, %d-%b-%Y, %H:%M") %>
+    <% end %>
+    <br>
+    <%= link_to "Generate lessons", generate_lessons_course_path(@course), method: :patch, data: { disable_with: "Generating..." }, class: "btn btn-sm btn-success" %>
+    <br>
   
   </div>
   <div class="card-footer">
