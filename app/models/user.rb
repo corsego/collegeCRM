@@ -55,7 +55,7 @@ class User < ApplicationRecord
   private
 
   def calculate_student_total
-    update_column :student_total, attendances.map(&:student_price_start).sum
+    update_column :student_total, attendances.map(&:student_price_final).sum
   end
 
 end

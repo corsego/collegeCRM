@@ -26,7 +26,8 @@
                   <li class="list-group-item">
                     <%= link_to attendance.user, user_path(attendance.user) %>
                     <%= status_label(attendance.status) %>
-                    <%= attendance.student_price_start_cents %>
+                    <%= attendance.student_price_start_cents %> /
+                    <%= attendance.student_price_final_cents %>
                   </li>
                 <% end %>
               </ul>

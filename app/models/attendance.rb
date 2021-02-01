@@ -9,6 +9,7 @@ class Attendance < ApplicationRecord
   validates_uniqueness_of :lesson_id, scope: :user_id 
 
   monetize :student_price_start, as: :student_price_start_cents
+  monetize :student_price_final, as: :student_price_final_cents
 
   STATUSES = [:planned, :attended, :not_attended]
   def self.statuses
@@ -21,6 +22,16 @@ class Attendance < ApplicationRecord
 
   after_create do
     update_column :student_price_start, lesson.course.service.client_price
+  end
+
+  after_save do
+    if status == "planned"
+      update_column :student_price_final, 0
+    elsif status == "attended"
+      update_column :student_price_final, student_price_start
+    elsif status == "not_attended"
+      update_column :student_price_final, 0
+    end
   end
 
 end
