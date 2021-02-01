@@ -38,12 +38,11 @@ class User < ApplicationRecord
   has_many :attendances, dependent: :restrict_with_error
   has_many :courses, dependent: :restrict_with_error
 
-  def total_attendance_price
-    attendances.map(&:student_price_start).sum
+  after_touch do
+    calculate_student_total
   end
 
-  monetize :total_attendance_price, as: :total_attendance_price_cents
-
+  monetize :student_total, as: :student_total_cents
 
   def to_s
     email
@@ -51,6 +50,12 @@ class User < ApplicationRecord
   
   def to_label
     to_s
+  end
+
+  private
+
+  def calculate_student_total
+    update_column :student_total, attendances.map(&:student_price_start).sum
   end
 
 end
