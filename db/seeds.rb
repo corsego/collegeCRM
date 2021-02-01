@@ -10,3 +10,10 @@ Service.create(name: "Math", duration: 45, client_price: 0)
 Service.create(name: "Massage", duration: 45, client_price: 0)
 Service.create(name: "Yoga", duration: 45, client_price: 0)
 
+Course.create(user: User.first, classroom: Classroom.first, service: Service.first)
+Course.first.update(monday: true, wednesday: true)
+Course.first.update(start_time: Time.now + 1.day)
+
+Course.create(user: User.second, classroom: Classroom.second, service: Service.second)
+Course.second.update(tuesday: true, thursday: true)
+Course.second.update(start_time: Time.now + 1.day)
