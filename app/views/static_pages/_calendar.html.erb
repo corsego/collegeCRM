@@ -21,6 +21,10 @@
                 Classroom:
                 <%= link_to lesson.classroom, classroom_path(lesson.classroom) %>
               <% end %>
+
+              <%= lesson.teacher_price_start_cents %> /
+              <%= lesson.teacher_price_final_cents %>
+
               <ul class="list-group">
                 <% lesson.attendances.each do |attendance| %>
                   <li class="list-group-item">

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_01_123635) do
+ActiveRecord::Schema.define(version: 2021_02_01_125212) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,6 +63,8 @@ ActiveRecord::Schema.define(version: 2021_02_01_123635) do
     t.datetime "start"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "teacher_price_start", default: 0, null: false
+    t.integer "teacher_price_final", default: 0, null: false
     t.index ["classroom_id"], name: "index_lessons_on_classroom_id"
     t.index ["course_id"], name: "index_lessons_on_course_id"
     t.index ["user_id"], name: "index_lessons_on_user_id"
@@ -74,6 +76,7 @@ ActiveRecord::Schema.define(version: 2021_02_01_123635) do
     t.integer "client_price"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "teacher_price", default: 0, null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -110,6 +113,7 @@ ActiveRecord::Schema.define(version: 2021_02_01_123635) do
     t.bigint "invited_by_id"
     t.integer "invitations_count", default: 0
     t.integer "student_total", default: 0, null: false
+    t.integer "teacher_total", default: 0, null: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
