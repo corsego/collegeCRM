@@ -8,7 +8,8 @@ class Course < ApplicationRecord
   accepts_nested_attributes_for :enrollments, reject_if: :all_blank, allow_destroy: true
 
   has_many :attendances, through: :lessons
-  
+  has_many :users, through: :enrollments  
+
   include Schedulable
   
   def schedule
