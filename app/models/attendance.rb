@@ -34,4 +34,13 @@ class Attendance < ApplicationRecord
     end
   end
 
+  validate :can_not_attend_own_course_or_lesson
+  def can_not_attend_own_course_or_lesson
+    if user_id.present?
+      if user_id == lesson.user_id || user_id == lesson.course.user_id
+        errors.add(:user_id, "can not attend own course or lesson")
+      end
+    end
+  end
+
 end

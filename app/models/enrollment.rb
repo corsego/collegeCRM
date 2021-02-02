@@ -11,4 +11,13 @@ class Enrollment < ApplicationRecord
     id
   end
 
+  validate :can_not_be_enrolled_in_own_course
+  def can_not_be_enrolled_in_own_course
+    if user_id.present?
+      if user_id == course.user_id
+        errors.add(:user_id, "can not be enrolled in own course")
+      end
+    end
+  end
+
 end
