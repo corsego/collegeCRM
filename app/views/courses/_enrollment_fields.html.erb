@@ -1,4 +1,4 @@
 <div class="nested-fields form-inline">
-  <%= f.association :user, label: false %>
+  <%= f.input :user_id, collection: User.where.not(id: @course.user_id) %>
   <%= link_to_remove_association "remove enrollment", f, class: "btn btn-sm btn-danger" %>
 </div>
