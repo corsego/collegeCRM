@@ -21,7 +21,7 @@ class Attendance < ApplicationRecord
   end
 
   after_create do
-    update_column :student_price_start, lesson.course.service.client_price
+    update_column :student_price_start, lesson.course.service.student_price
   end
 
   after_save do

@@ -6,9 +6,9 @@ Classroom.create(name: "Room1")
 Classroom.create(name: "Room2")
 Classroom.create(name: "Room3")
 
-Service.create(name: "Math", duration: 45, client_price: 0)
-Service.create(name: "Massage", duration: 45, client_price: 0)
-Service.create(name: "Yoga", duration: 45, client_price: 0)
+Service.create(name: "Math", duration: 45, student_price: 0)
+Service.create(name: "Massage", duration: 45, student_price: 0)
+Service.create(name: "Yoga", duration: 45, student_price: 0)
 
 Course.create(user: User.first, classroom: Classroom.first, service: Service.first)
 Course.first.update(monday: true, wednesday: true)
