@@ -13,7 +13,7 @@ class Course < ApplicationRecord
   include Schedulable
   
   def schedule
-    schedule = IceCube::Schedule.new(now = self.start_time&.to_datetime)
+    schedule = IceCube::Schedule.new(now = self.start_time&.to_time)
     schedule.add_recurrence_rule(
       IceCube::Rule.weekly.day(active_days)
     )
