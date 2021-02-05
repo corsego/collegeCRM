@@ -2,6 +2,8 @@ class Attendance < ApplicationRecord
 
   belongs_to :user, touch: true
   belongs_to :lesson
+  # belongs_to :enrollment
+  belongs_to :enrollment, required: false # required false for creation. association is added after_create. not best approach
 
   validates :status, presence: true
   # user can not attend the same lesson twice
@@ -22,6 +24,8 @@ class Attendance < ApplicationRecord
 
   after_create do
     update_column :student_price_start, lesson.course.service.student_price
+    # update_column :enrollment_id, Enrollment.find_by(user: user, course: lesson.course).id
+    update_column :enrollment_id, lesson.course.enrollments.find_by(user: user).id
   end
 
   after_save do
