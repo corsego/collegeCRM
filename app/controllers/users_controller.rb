@@ -5,7 +5,11 @@ class UsersController < ApplicationController
   before_action :require_admin_or_owner, only: [:edit, :update]
 
   def index
-    @users = User.all.order(created_at: :desc)
+    if params[:email]
+      @users = User.where('email ILIKE ?', "%#{params[:email]}%").order(created_at: :desc) #case-insensitive
+    else
+      @users = User.all.order(created_at: :desc)
+    end
   end
 
   def edit

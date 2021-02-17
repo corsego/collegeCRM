@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #25364a;">
   <a class="navbar-brand" href="/">
     <i class="fas fa-user-lock"></i>
     CollegeCRM
@@ -13,13 +13,25 @@
         Home
       <% end %>
       <% if current_user %>
-        <%= link_to calendar_path, class: "nav-link #{'active font-weight-bold' if current_page?(calendar_path)}" do %>
-          <div class="fa fa-calendar-alt"></div>
-          Calendar
-        <% end %>
         <%= link_to users_path, class: "nav-link #{'active font-weight-bold' if current_page?(users_path)}" do %>
           <div class="fa fa-users"></div>
           Users
+        <% end %>
+        <div class="form-inline my-2 my-lg-0">
+          <%= form_tag(users_path, method: :get) do %>
+            <div class="input-group">
+              <%= text_field_tag :email, params[:email], autocomplete: 'off', placeholder: "user email", class: 'form-control-sm' %>
+              <span class="input-group-append">
+                <button class="btn btn-primary btn-sm" type="submit">
+                  <span aria-hidden="true" class="fa fa-search"></span>
+                </button>
+              </span>
+            </div>
+          <% end %>
+        </div>
+        <%= link_to calendar_path, class: "nav-link #{'active font-weight-bold' if current_page?(calendar_path)}" do %>
+          <div class="fa fa-calendar-alt"></div>
+          Calendar
         <% end %>
         <%= link_to classrooms_path, class: "nav-link #{'active font-weight-bold' if current_page?(classrooms_path)}" do %>
           <div class="fa fa-door-open"></div>
