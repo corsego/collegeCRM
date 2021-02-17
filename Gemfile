@@ -31,12 +31,14 @@ end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-gem 'devise'
+#gem 'devise'
+gem "devise", github: "heartcombo/devise", branch: "master" # https://stackoverflow.com/a/66155946/5695646
 gem 'omniauth-google-oauth2'
 gem 'omniauth-github'
 gem 'omniauth-twitter'
 gem 'omniauth-facebook'
 gem 'devise_invitable', '~> 2.0.0'
+gem "omniauth-rails_csrf_protection"
 
 gem 'invisible_captcha'
 

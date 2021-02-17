@@ -3,7 +3,17 @@
     Ruby on Rails 6 User Management app
   </h1>
 </div>
-
+<div class="text-center">
+  <% unless user_signed_in? %>
+    <hr>
+    <% User.omniauth_providers.each do |provider| %>
+      <%= link_to omniauth_authorize_path(User, provider), method: :post, class: "btn btn-md btn-outline-primary", data: { disable_with: "Connecting..." } do %>
+        Sign in with 
+        <%= provider.capitalize %>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
 <hr>
 <div class="text-center">
   <h2>Core features</h2>
