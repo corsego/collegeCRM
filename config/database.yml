@@ -23,13 +23,13 @@ default: &default
 
 development:
   <<: *default
-  database: superauth_development
+  database: collegecrm_development
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
   # When left blank, postgres will use the default role. This is
   # the same name as the operating system user running Rails.
-  #username: superauth
+  #username: collegecrm
 
   # The password associated with the postgres role (username).
   #password:
@@ -57,7 +57,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: superauth_test
+  database: collegecrm_test
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -81,6 +81,6 @@ test:
 #
 production:
   <<: *default
-  database: superauth_production
-  username: superauth
-  password: <%= ENV['superauth_DATABASE_PASSWORD'] %>
+  database: collegecrm_production
+  username: collegecrm
+  password: <%= ENV['collegecrm_DATABASE_PASSWORD'] %>
