@@ -20,9 +20,9 @@ Rails.application.configure do
   Rails.application.config.middleware.use ExceptionNotification::Rack,
     email: {
       deliver_with: :deliver,
-      email_prefix: '[PREFIX] ',
-      sender_address: %{"collegecrm error" <hello@corsego.com>},
-      exception_recipients: %w{yshmarov@gmail.com}
+      email_prefix: '[CollegeCRM] ',
+      sender_address: %{"ExceptionNotification" <hello@corsego.com>},
+      exception_recipients: %w{hello@corsego.com}
     }
 
   # Code is not reloaded between requests.

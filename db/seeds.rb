@@ -17,3 +17,7 @@ Course.first.update(start_time: Time.now + 1.day)
 Course.create(user: User.second, classroom: Classroom.second, service: Service.second)
 Course.second.update(tuesday: true, thursday: true)
 Course.second.update(start_time: Time.now + 1.day)
+
+# Lesson
+# Enrollment
+# Attendance
