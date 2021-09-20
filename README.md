@@ -37,8 +37,8 @@ Stack:
 
 console:
 ```
-git clone https://github.com/corsego/superauth
-cd superauth
+git clone https://github.com/corsego/collegeCRM
+cd collegeCRM
 bundle
 yarn
 rails db:create db:migrate
