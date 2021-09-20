@@ -33,10 +33,12 @@ class User < ApplicationRecord
     self.update(student: true)
   end
 
-  has_many :enrollments, dependent: :restrict_with_error
-  has_many :lessons, dependent: :restrict_with_error
-  has_many :attendances, dependent: :restrict_with_error
+  # as teacher
   has_many :courses, dependent: :restrict_with_error
+  has_many :lessons, dependent: :restrict_with_error
+  # as student
+  has_many :enrollments, dependent: :restrict_with_error
+  has_many :attendances, dependent: :restrict_with_error
 
   after_touch do
     calculate_student_total
