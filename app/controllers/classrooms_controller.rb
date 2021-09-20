@@ -1,5 +1,5 @@
 class ClassroomsController < ApplicationController
-  before_action :set_classroom, only: [:show, :edit, :update, :destroy]
+  before_action :set_classroom, only: %i[show edit update destroy]
 
   def index
     @classrooms = Classroom.all
@@ -42,11 +42,12 @@ class ClassroomsController < ApplicationController
   end
 
   private
-    def set_classroom
-      @classroom = Classroom.find(params[:id])
-    end
 
-    def classroom_params
-      params.require(:classroom).permit(:name)
-    end
+  def set_classroom
+    @classroom = Classroom.find(params[:id])
+  end
+
+  def classroom_params
+    params.require(:classroom).permit(:name)
+  end
 end

@@ -1,8 +1,8 @@
 class User < ApplicationRecord
   # :timeoutable
   devise :invitable, :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable, 
-         :confirmable, :trackable, :lockable, :invitable, 
+         :recoverable, :rememberable, :validatable,
+         :confirmable, :trackable, :lockable, :invitable,
          :omniauthable
 
   include Roleable
@@ -10,17 +10,13 @@ class User < ApplicationRecord
   def self.from_omniauth(access_token)
     data = access_token.info
     user = User.where(email: data['email']).first
-    unless user
-      user = User.create(
-        email: data['email'],
-        password: Devise.friendly_token[0,20]
-      )
-    end
+    user ||= User.create(
+      email: data['email'],
+      password: Devise.friendly_token[0, 20]
+    )
     user.provider = access_token.provider
     user.uid = access_token.uid
-    unless user.name.present?
-      user.name = access_token.info.name
-    end
+    user.name = access_token.info.name unless user.name.present?
     user.image = access_token.info.image
     user.save
 
@@ -30,7 +26,7 @@ class User < ApplicationRecord
 
   after_create do
     # assign default role
-    self.update(student: true)
+    update(student: true)
   end
 
   # as teacher
@@ -53,7 +49,7 @@ class User < ApplicationRecord
   def to_s
     email
   end
-  
+
   def to_label
     to_s
   end
@@ -71,5 +67,4 @@ class User < ApplicationRecord
   def calculate_teacher_total
     update_column :teacher_total, lessons.map(&:teacher_price_final).sum
   end
-
 end

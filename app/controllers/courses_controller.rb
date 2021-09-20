@@ -1,5 +1,5 @@
 class CoursesController < ApplicationController
-  before_action :set_course, only: [:show, :edit, :update, :destroy, :generate_lessons]
+  before_action :set_course, only: %i[show edit update destroy generate_lessons]
 
   def index
     @courses = Course.all
@@ -7,7 +7,7 @@ class CoursesController < ApplicationController
 
   def generate_lessons
     # delete future lessons to regenerate them
-    @course.lessons.where("start > ?", Time.now).destroy_all
+    @course.lessons.where('start > ?', Time.now).destroy_all
 
     # regenerates future lessons
 
@@ -15,15 +15,15 @@ class CoursesController < ApplicationController
     @course.schedule.next_occurrences(8).each do |occurrence|
       @course.lessons.find_or_create_by(start: occurrence, user: @course.user, classroom: @course.classroom)
     end
-    
+
     # generate attendances for future lessons
-    @course.lessons.where("start > ?", Time.now).each do |lesson|
+    @course.lessons.where('start > ?', Time.now).each do |lesson|
       @course.enrollments.each do |enrollment|
-        lesson.attendances.find_or_create_by(status: "planned", user: enrollment.user)
+        lesson.attendances.find_or_create_by(status: 'planned', user: enrollment.user)
       end
     end
-    
-    redirect_to @course, notice: "generate_lessons - ok"
+
+    redirect_to @course, notice: 'generate_lessons - ok'
   end
 
   def show
@@ -65,13 +65,14 @@ class CoursesController < ApplicationController
   end
 
   private
-    def set_course
-      @course = Course.find(params[:id])
-    end
 
-    def course_params
-      params.require(:course).permit(:user_id, :classroom_id, :service_id, :start_time, 
-        *Course::DAYS_OF_WEEK,
-        enrollments_attributes: [:id, :user_id, :_destroy])
-    end
+  def set_course
+    @course = Course.find(params[:id])
+  end
+
+  def course_params
+    params.require(:course).permit(:user_id, :classroom_id, :service_id, :start_time,
+                                   *Course::DAYS_OF_WEEK,
+                                   enrollments_attributes: %i[id user_id _destroy])
+  end
 end

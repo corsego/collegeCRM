@@ -1,19 +1,18 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
-
   def google_oauth2
-    handle_auth "Google"
+    handle_auth 'Google'
   end
 
   def github
-    handle_auth "Github"
+    handle_auth 'Github'
   end
 
   def twitter
-    handle_auth "Twitter"
+    handle_auth 'Twitter'
   end
 
   def facebook
-    handle_auth "Facebook"
+    handle_auth 'Facebook'
   end
 
   def handle_auth(kind)
@@ -28,5 +27,4 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       redirect_to new_user_registration_url, alert: @user.errors.full_messages.join("\n")
     end
   end
-
 end

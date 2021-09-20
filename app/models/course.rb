@@ -8,12 +8,12 @@ class Course < ApplicationRecord
   accepts_nested_attributes_for :enrollments, reject_if: :all_blank, allow_destroy: true
 
   has_many :attendances, through: :lessons
-  has_many :users, through: :enrollments  
+  has_many :users, through: :enrollments
 
   include Schedulable
-  
+
   def schedule
-    schedule = IceCube::Schedule.new(now = self.start_time&.to_time)
+    schedule = IceCube::Schedule.new(now = start_time&.to_time)
     schedule.add_recurrence_rule(
       IceCube::Rule.weekly.day(active_days)
     )
@@ -23,5 +23,4 @@ class Course < ApplicationRecord
   def to_s
     id
   end
-  
 end

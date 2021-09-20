@@ -1,11 +1,9 @@
 module UsersHelper
-  
   def ban_status(user)
     if user.access_locked?
-      "Unban"
+      'Unban'
     else
-      "Ban"
+      'Ban'
     end
   end
-  
 end
