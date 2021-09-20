@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Lesson < ApplicationRecord
   belongs_to :user, touch: true
   belongs_to :classroom
@@ -7,7 +9,7 @@ class Lesson < ApplicationRecord
 
   validates :status, :start, presence: true
 
-  STATUSES = %i[planned confirmed cancelled]
+  STATUSES = %i[planned confirmed cancelled].freeze
   def self.statuses
     STATUSES.map { |status| [status, status] }
   end
@@ -20,11 +22,12 @@ class Lesson < ApplicationRecord
   end
 
   after_save do
-    if status == 'planned'
+    case status
+    when 'planned'
       update_column :teacher_price_final, 0
-    elsif status == 'confirmed'
+    when 'confirmed'
       update_column :teacher_price_final, teacher_price_start
-    elsif status == 'cancelled'
+    when 'cancelled'
       update_column :teacher_price_final, 0
     end
   end

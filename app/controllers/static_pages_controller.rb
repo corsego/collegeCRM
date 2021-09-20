@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class StaticPagesController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[landing_page privacy_policy]
 
@@ -12,7 +14,7 @@ class StaticPagesController < ApplicationController
     @classrooms = Classroom.order(name: :asc)
     @courses = Course.order(id: :desc)
 
-    if params.has_key?(:user_id)
+    if params.key?(:user_id)
       lessons = Lesson.includes(:user, :classroom, :course, :attendances)
       @user = params[:user_id]
       @classroom = params[:classroom_id]

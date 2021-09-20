@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Classroom < ApplicationRecord
   has_many :courses, dependent: :restrict_with_error
 

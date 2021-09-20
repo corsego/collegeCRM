@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CoursesController < ApplicationController
   before_action :set_course, only: %i[show edit update destroy generate_lessons]
 
@@ -7,7 +9,7 @@ class CoursesController < ApplicationController
 
   def generate_lessons
     # delete future lessons to regenerate them
-    @course.lessons.where('start > ?', Time.now).destroy_all
+    @course.lessons.where('start > ?', Time.zone.now).destroy_all
 
     # regenerates future lessons
 
@@ -17,7 +19,7 @@ class CoursesController < ApplicationController
     end
 
     # generate attendances for future lessons
-    @course.lessons.where('start > ?', Time.now).each do |lesson|
+    @course.lessons.where('start > ?', Time.zone.now).each do |lesson|
       @course.enrollments.each do |enrollment|
         lesson.attendances.find_or_create_by(status: 'planned', user: enrollment.user)
       end

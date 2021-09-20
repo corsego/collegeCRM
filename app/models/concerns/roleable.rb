@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 module Roleable
   extend ActiveSupport::Concern
   included do
     # List user roles
-    ROLES = %i[admin teacher student]
+    ROLES = %i[admin teacher student].freeze
 
     # json column to store roles
     store_accessor :roles, *ROLES
@@ -14,7 +16,8 @@ module Roleable
       define_method(:"#{role}?") { send(role) }
     end
 
-    def active_roles # Where value true
+    # Where value true
+    def active_roles
       ROLES.select { |role| send(:"#{role}?") }.compact
     end
 

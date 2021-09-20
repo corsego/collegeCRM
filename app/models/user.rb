@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   # :timeoutable
   devise :invitable, :database_authenticatable, :registerable,
@@ -16,11 +18,11 @@ class User < ApplicationRecord
     )
     user.provider = access_token.provider
     user.uid = access_token.uid
-    user.name = access_token.info.name unless user.name.present?
+    user.name = access_token.info.name if user.name.blank?
     user.image = access_token.info.image
     user.save
 
-    user.confirmed_at = Time.now # autoconfirm user from omniauth
+    user.confirmed_at = Time.zone.now # autoconfirm user from omniauth
     user
   end
 

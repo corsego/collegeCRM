@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 module Schedulable
   extend ActiveSupport::Concern
   included do
     # List user days
-    DAYS_OF_WEEK = %i[monday tuesday wednesday thursday friday saturday sunday]
+    DAYS_OF_WEEK = %i[monday tuesday wednesday thursday friday saturday sunday].freeze
 
     # json column to store days
     store_accessor :days, *DAYS_OF_WEEK
@@ -14,7 +16,8 @@ module Schedulable
       define_method(:"#{day}?") { send(day) }
     end
 
-    def active_days # Where value true
+    # Where value true
+    def active_days
       DAYS_OF_WEEK.select { |day| send(:"#{day}?") }.compact
     end
   end

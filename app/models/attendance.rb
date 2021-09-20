@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Attendance < ApplicationRecord
   belongs_to :user, touch: true
   belongs_to :lesson
@@ -12,7 +14,7 @@ class Attendance < ApplicationRecord
   monetize :student_price_start, as: :student_price_start_cents
   monetize :student_price_final, as: :student_price_final_cents
 
-  STATUSES = %i[planned attended not_attended]
+  STATUSES = %i[planned attended not_attended].freeze
   def self.statuses
     STATUSES.map { |status| [status, status] }
   end
@@ -28,11 +30,12 @@ class Attendance < ApplicationRecord
   end
 
   after_save do
-    if status == 'planned'
+    case status
+    when 'planned'
       update_column :student_price_final, 0
-    elsif status == 'attended'
+    when 'attended'
       update_column :student_price_final, student_price_start
-    elsif status == 'not_attended'
+    when 'not_attended'
       update_column :student_price_final, 0
     end
   end

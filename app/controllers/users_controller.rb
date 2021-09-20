@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UsersController < ApplicationController
   before_action :require_admin, only: %i[ban destroy resend_confirmation_instructions]
   before_action :require_admin_or_inviter, only: [:resend_invitation]
