@@ -10,22 +10,22 @@ class StaticPagesController < ApplicationController
   end
 
   def calendar
-    @users = User.order(email: :asc)
-    @classrooms = Classroom.order(name: :asc)
+    @users = User.order(email: :asc).teacher
+    #@classrooms = Classroom.order(name: :asc)
     @courses = Course.order(id: :desc)
 
     if params.key?(:user_id)
-      lessons = Lesson.includes(:user, :classroom, :course, :attendances)
+      lessons = Lesson.includes(:user, :course, :attendances)
       @user = params[:user_id]
-      @classroom = params[:classroom_id]
+      #@classroom = params[:classroom_id]
       @course = params[:course_id]
 
       lessons = lessons.where(user_id: @user) if @user.present?
-      lessons = lessons.where(classroom_id: @classroom) if @classroom.present?
+      #lessons = lessons.where(classroom_id: @classroom) if @classroom.present?
       lessons = lessons.where(course_id: @course) if @course.present?
       @lessons = lessons.all
     else
-      @lessons = Lesson.includes(:user, :classroom, :course, :attendances)
+      @lessons = Lesson.includes(:user, :course, :attendances)
     end
   end
 end

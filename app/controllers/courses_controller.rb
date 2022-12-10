@@ -2,6 +2,10 @@
 
 class CoursesController < ApplicationController
   before_action :set_course, only: %i[show edit update destroy generate_lessons]
+  before_action :require_teacher, only: %i[new edit create update generate_lessons]
+  before_action :require_owner_or_admin, only: %i[destroy]
+
+  LESSONS_COUNT_DEAFULT = 8
 
   def index
     @courses = Course.all
@@ -14,7 +18,7 @@ class CoursesController < ApplicationController
     # regenerates future lessons
 
     # @course.schedule.occurrences(Time.now + 1.month).each do |occurrence|
-    @course.schedule.next_occurrences(8).each do |occurrence|
+    @course.schedule.next_occurrences(LESSONS_COUNT_DEAFULT).each do |occurrence|
       @course.lessons.find_or_create_by(start: occurrence, user: @course.user, classroom: @course.classroom)
     end
 
@@ -42,6 +46,8 @@ class CoursesController < ApplicationController
 
   def create
     @course = Course.new(course_params)
+    @course.user_id = current_user.id
+    @course.classroom_id = DEFAUTL_CLASSROOM_ID
 
     if @course.save
       redirect_to @course, notice: 'Course was successfully created.'
@@ -68,12 +74,20 @@ class CoursesController < ApplicationController
 
   private
 
+  def require_teacher
+    redirect_to (request.referer || root_path), alert: 'You are not authorized to perform this action' unless current_user.teacher? || current_user.admin?
+  end
+
+  def require_owner_or_admin
+    redirect_to (request.referer || root_path), alert: 'You are not authorized to perform this action' unless current_user == @course.user || current_user.admin?
+  end
+
   def set_course
     @course = Course.find(params[:id])
   end
 
   def course_params
-    params.require(:course).permit(:user_id, :classroom_id, :service_id, :start_time,
+    params.require(:course).permit(:service_id, :start_time,
                                    *Course::DAYS_OF_WEEK,
                                    enrollments_attributes: %i[id user_id _destroy])
   end

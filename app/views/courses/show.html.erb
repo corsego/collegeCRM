@@ -6,13 +6,13 @@
   </div>
   <div class="card-body">
   
-    <b>User:</b>
+    <b>Teacher:</b>
     <%= link_to @course.user,@course.user %>
     <br>
   
-    <b>Classroom:</b>
-    <%= link_to @course.classroom, @course.classroom %>
-    <br>
+<!--    <b>Classroom:</b>-->
+    <%#= link_to @course.classroom, @course.classroom %>
+<!--    <br>-->
   
     <b>Service:</b>
     <%= link_to @course.service, @course.service %>
@@ -30,12 +30,15 @@
     <%= @course.schedule %>
     <br>
 
-    <b>Occurrences:</b>
-    <% @course.schedule.next_occurrences(8).each do |occurrence| %>
-      <br>
-      <%= occurrence.strftime("%a, %d-%b-%Y, %H:%M") %>
-    <% end %>
+    <b>Lesson's Count</b>
+    <%= @course.lessons.size %>
     <br>
+<!--    <b>Occurrences:</b>-->
+    <%# @course.schedule.next_occurrences(8).each do |occurrence| %>
+<!--      <br>-->
+      <%#= occurrence.strftime("%a, %d-%b-%Y, %H:%M") %>
+    <%# end %>
+<!--    <br>-->
     <%= link_to "Generate lessons", generate_lessons_course_path(@course), method: :patch, data: { disable_with: "Generating..." }, class: "btn btn-sm btn-success" %>
     <br>
   

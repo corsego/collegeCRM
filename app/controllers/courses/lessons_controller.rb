@@ -4,6 +4,8 @@ module Courses
   class LessonsController < ApplicationController
     before_action :set_course
     before_action :set_lesson, only: %i[edit update destroy]
+    before_action :require_teacher, only: %i[new create update]
+    before_action :require_owner_or_admin, only: %i[destroy]
 
     def new
       @lesson = Lesson.new(classroom_id: @course.classroom_id, user_id: @course.user_id)
@@ -38,6 +40,14 @@ module Courses
     end
 
     private
+
+    def require_teacher
+      redirect_to (request.referer || root_path), alert: 'You are not authorized to perform this action' unless current_user.teacher? || current_user.admin?
+    end
+
+    def require_owner_or_admin
+      redirect_to (request.referer || root_path), alert: 'You are not authorized to perform this action' unless current_user == @lesson.user || current_user.admin?
+    end
 
     def set_course
       @course = Course.find(params[:course_id])

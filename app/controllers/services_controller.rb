@@ -2,6 +2,8 @@
 
 class ServicesController < ApplicationController
   before_action :set_service, only: %i[show edit update destroy]
+  before_action :require_teacher, only: %i[new edit create update generate_lessons]
+  before_action :require_admin, only: %i[destroy]
 
   def index
     @services = Service.all
@@ -44,6 +46,14 @@ class ServicesController < ApplicationController
   end
 
   private
+
+  def require_teacher
+    redirect_to (request.referer || root_path), alert: 'You are not authorized to perform this action' unless current_user.teacher?
+  end
+
+  def require_admin
+    redirect_to (request.referer || root_path), alert: 'You are not authorized to perform this action' unless current_user.admin?
+  end
 
   def set_service
     @service = Service.find(params[:id])

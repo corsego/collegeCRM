@@ -17,24 +17,24 @@
               <% end %>
               <% unless @user.present? %>
                 <br>
-                User:
+                Teacher:
                 <%= link_to lesson.user, user_path(lesson.user) %>
               <% end %>
-              <% unless @classroom.present? %>
-                <br>
-                Classroom:
-                <%= link_to lesson.classroom, classroom_path(lesson.classroom) %>
-              <% end %>
+              <%# unless @classroom.present? %>
+<!--                <br>-->
+<!--                Classroom:-->
+                <%#= link_to lesson.classroom, classroom_path(lesson.classroom) %>
+              <%# end %>
   
-              <br>
-              <%= lesson.teacher_price_start_cents %>/<%= lesson.teacher_price_final_cents %>
+<!--              <br>-->
+<!--              <%#= lesson.teacher_price_start_cents %>/<%#= lesson.teacher_price_final_cents %>-->
   
               <ul class="list-group">
                 <% lesson.attendances.each do |attendance| %>
                   <li class="list-group-item">
                     <%= link_to attendance.user, user_path(attendance.user) %>
                     <%= status_label(attendance.status) %>
-                    <%= attendance.student_price_start_cents %>/<%= attendance.student_price_final_cents %>
+<!--                    <%#= attendance.student_price_start_cents %>/<%#= attendance.student_price_final_cents %>-->
                   </li>
                 <% end %>
               </ul>
